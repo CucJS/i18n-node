@@ -154,10 +154,7 @@ module.exports = (function() {
 
     // implicitly read all locales
     if (Array.isArray(opt.locales)) {
-
-      opt.locales.forEach(function(l) {
-        read(l);
-      });
+      i18n.reloadLocales();
 
       // auto reload locale files when changed
       if (autoReload) {
@@ -174,6 +171,12 @@ module.exports = (function() {
         });
       }
     }
+  };
+
+  i18n.reloadLocales = function i18nReloadLocales() {
+    Object.keys(locales).forEach(function(l) {
+      read(l);
+    });
   };
 
   i18n.init = function i18nInit(request, response, next) {
